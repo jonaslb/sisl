@@ -53,6 +53,9 @@ def array_fill_repeat(array, size, cls=None):
     has size `size`. Note that initial size of `array` has
     to be an integer part of `size`.
     """
+    if len(array) == 0 and size == 0:
+        return np.array(array)
+
     try:
         reps = size // len(array)
     except:
