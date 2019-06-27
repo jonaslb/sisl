@@ -1,5 +1,25 @@
+0.9.7
+=====
+
+- Forced align=False in inner such that users should take care of this
+
+- Added align_norm to swap states such that they more or less
+	correspond to the same band (which should have a closer residual
+  for on-site coefficients).
+
+- Removed norm2 and made norm equal to norm2 for states. This is
+	the more natural thing, besides. Doing norm() ** 0.5 shouldn't be
+  too much of a problem.
+
+
 0.9.6
 =====
+
+- Officially added real-space self-energy calculations
+
+- Cleaned TBT vs. PHT for class name structures
+
+- Bugfix for reading MD output from Siesta out-files #130
 
 - Bugfix for tbtse files when requesting pivoting indices using this
 	combination ``in_device=True, sort=False`` which in most cases
@@ -64,7 +84,7 @@
   This is extremely handy for `BrillouinZone.asaverage`/`assum` when calculating
 	multiple values using `eigenstate` objects.
 
-- Added reflection calculation to `tbtncSileSiesta`
+- Added reflection calculation to `tbtncSileTBtrans`
 
 - Added more distribution functions (step and heaviside)
 
