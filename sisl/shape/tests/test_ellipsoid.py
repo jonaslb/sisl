@@ -6,6 +6,7 @@ import numpy as np
 from sisl.quaternion import Quaternion
 from sisl.utils.mathematics import fnorm
 from sisl.shape.ellipsoid import *
+from sisl.messages import SislWarning
 
 pytestmark = pytest.mark.shape
 
@@ -18,7 +19,8 @@ def test_create_ellipsoid():
     v0 = [1., 0.2, 1.0]
     v1 = [1., -0.2, 1.0]
     v2 = [1., -0.2, -1.0]
-    el = Ellipsoid([v0, v1, v2])
+    with pytest.warns(SislWarning):
+        el = Ellipsoid([v0, v1, v2])
     q = Quaternion(45, [1, 0, 0])
     eye = np.identity(3)
     eye = q.rotate(eye)
@@ -40,21 +42,21 @@ def test_tosphere():
     assert el.toSphere().radius == pytest.approx(3)
 
 
-@pytest.mark.xfail(raises=ValueError)
 def test_create_ellipsoid_fail():
     v0 = [1., 0.2, 1.0]
     v1 = [1., 0.2, 1.0]
     v2 = [1., -0.2, -1.0]
-    el = Ellipsoid([v0, v1, v2])
+    with pytest.warns(SislWarning), pytest.raises(ValueError):
+        el = Ellipsoid([v0, v1, v2])
 
 
-@pytest.mark.xfail(raises=ValueError)
 def test_create_ellipsoid_fail2():
     v0 = [1., 0.2, 1.0]
     v1 = [1., 0.2, 1.0]
     v2 = [1., -0.2, -1.0]
     v3 = [1., -0.2, -1.0]
-    el = Ellipsoid([v0, v1, v2, v3])
+    with pytest.raises(ValueError):
+        el = Ellipsoid([v0, v1, v2, v3])
 
 
 def test_create_sphere():
