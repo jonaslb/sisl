@@ -137,7 +137,7 @@ from numpy.distutils.system_info import get_info
 all_info = get_info('ALL')
 
 # Define compilation flags
-extra_compile_args = ""
+extra_compile_args = ["-O3", "-march=native"]
 extra_link_args = extra_compile_args
 
 # in numpy>=1.16.0, silence build warnings about deprecated API usage
