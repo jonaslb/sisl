@@ -110,17 +110,17 @@ def test_within1():
 
 def test_within_index1():
     o = Ellipsoid([1., 2., 3.])
-    assert not o.within_index([-1.]*3) == [0]
-    assert o.within_index([.2]*3) == [0]
-    assert o.within_index([.5]*3) == [0]
+    assert not o.within_index([-1.]*3).size
+    assert (o.within_index([.2]*3) == [0]).all()
+    assert (o.within_index([.5]*3) == [0]).all()
     o = Ellipsoid([1., 1., 2.])
-    assert not o.within_index([-1.]*3) == [0]
-    assert o.within_index([.2]*3) == [0]
-    assert o.within_index([.5]*3) == [0]
+    assert not o.within_index([-1.]*3).size
+    assert (o.within_index([.2]*3) == [0]).all()
+    assert (o.within_index([.5]*3) == [0]).all()
     o = Sphere(1.)
-    assert not o.within_index([-1.]*3) == [0]
-    assert o.within_index([.2]*3) == [0]
-    assert o.within_index([.5]*3) == [0]
+    assert not o.within_index([-1.]*3).size
+    assert (o.within_index([.2]*3) == [0]).all()
+    assert (o.within_index([.5]*3) == [0]).all()
 
 
 def test_sphere_and():

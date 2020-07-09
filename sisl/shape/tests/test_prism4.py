@@ -97,8 +97,8 @@ def test_within1():
 
 def test_within_index1():
     cube = Cuboid([1.0]*3)
-    assert not cube.within_index([-1.]*3) == [0]
-    assert not cube.within_index([[-1.]*3, [-1., 0.5, 0.2]]) == [0, 1]
+    assert not cube.within_index([-1.]*3).size
+    assert not cube.within_index([[-1.]*3, [-1., 0.5, 0.2]]).size
     assert (cube.within_index([[-1.]*3,
                           [-1., 0.5, 0.2],
                           [.1, 0.5, 0.2]]) == [0, 1, 2]).any()
