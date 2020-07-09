@@ -2,6 +2,7 @@ import pytest
 import os.path as osp
 import sisl
 import numpy as np
+from sisl.io.sile import SileError
 
 pytestmark = [pytest.mark.io, pytest.mark.siesta]
 _dir = osp.join('sisl', 'io', 'siesta')
@@ -189,6 +190,6 @@ def test_gf_write_read_direct(sisl_tmp, sisl_system):
         assert np.allclose(SE1, SE2)
 
 
-@pytest.mark.xfail(raises=sisl.SileError)
 def test_gf_sile_error():
-    sisl.get_sile('non_existing_file.TSGF').read_header()
+    with pytest.raises(SileError):
+        sisl.get_sile('non_existing_file.TSGF').read_header()

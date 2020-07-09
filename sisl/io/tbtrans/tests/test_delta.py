@@ -60,7 +60,6 @@ def test_tbt_delta1(sisl_tmp, sisl_system):
         assert h.spsame(H)
 
 
-@pytest.mark.xfail(raises=ValueError)
 def test_tbt_delta_fail(sisl_tmp, sisl_system):
     f = sisl_tmp('gr.dH.nc', _dir)
     H = Hamiltonian(sisl_system.gtb)
@@ -71,7 +70,9 @@ def test_tbt_delta_fail(sisl_tmp, sisl_system):
         sile.write_delta(H, k=[0.] * 3)
         for i in range(H.no_s):
             H[0, i] = 1.
-        sile.write_delta(H, k=[0.2] * 3)
+        with pytest.raises(ValueError) as e:
+            sile.write_delta(H, k=[0.2] * 3)
+        assert e.match(r"sparsity pattern.+\[nnz\]")
 
 
 def test_tbt_delta_write_read(sisl_tmp, sisl_system):
@@ -88,7 +89,6 @@ def test_tbt_delta_write_read(sisl_tmp, sisl_system):
     assert h.dkind == H.dkind
 
 
-@pytest.mark.xfail(raises=ValueError)
 def test_tbt_delta_fail_list_col(sisl_tmp, sisl_system):
     f = sisl_tmp('gr.dH.nc', _dir)
     H = Hamiltonian(sisl_system.gtb)
@@ -100,10 +100,11 @@ def test_tbt_delta_fail_list_col(sisl_tmp, sisl_system):
         i = edges.max() + 1
         del H[0, i - 1]
         H[0, i] = 1.
-        sile.write_delta(H, E=1.)
+        with pytest.raises(ValueError) as e:
+            sile.write_delta(H, E=1.)
+        assert e.match(r"sparsity pattern.+\[list_col\]")
 
 
-@pytest.mark.xfail(raises=ValueError)
 def test_tbt_delta_fail_ncol(sisl_tmp, sisl_system):
     f = sisl_tmp('gr.dH.nc', _dir)
     H = Hamiltonian(sisl_system.gtb)
@@ -115,4 +116,6 @@ def test_tbt_delta_fail_ncol(sisl_tmp, sisl_system):
         i = edges.max() + 1
         H[0, i] = 1.
         H.finalize()
-        sile.write_delta(H, E=1.)
+        with pytest.raises(ValueError) as e:
+            sile.write_delta(H, E=1.)
+        assert e.match(r"sparsity pattern.+\[nnz\]")
