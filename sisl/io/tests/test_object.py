@@ -9,6 +9,7 @@ from sisl.io.siesta.binaries import _gfSileSiesta
 from sisl.io.tbtrans._cdf import *
 from sisl import Geometry, Grid, Hamiltonian
 from sisl import DensityMatrix, EnergyDensityMatrix
+from sisl.messages import SislInfo
 
 
 pytestmark = pytest.mark.io
@@ -354,13 +355,15 @@ class TestObject:
             sile(f, mode="wb").write_grid(G)
         # Read 1
         try:
-            g = sile(f, mode="r").read_grid()
+            with pytest.warns(None):  # may warn units
+                g = sile(f, mode="r").read_grid()
             assert np.allclose(g.grid, G.grid, atol=1e-5)
         except UnicodeDecodeError as e:
             pass
         # Read 2
         try:
-            g = Grid.read(sile(f, mode="r"))
+            with pytest.warns(None):  # may warn units
+                g = Grid.read(sile(f, mode="r"))
             assert np.allclose(g.grid, G.grid, atol=1e-5)
         except UnicodeDecodeError as e:
             pass
