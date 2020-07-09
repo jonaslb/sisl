@@ -272,7 +272,8 @@ def test_xv_preference(sisl_tmp):
     g.xyz[0, 0] += 1.
     g.write(sisl_tmp('siesta.XV', _dir))
 
-    g2 = fdfSileSiesta(sisl_tmp('file.fdf', _dir)).read_geometry(True)
+    with pytest.warns(SislWarning):
+        g2 = fdfSileSiesta(sisl_tmp('file.fdf', _dir)).read_geometry(True)
     assert np.allclose(g.cell, g2.cell)
     assert np.allclose(g.xyz, g2.xyz)
 
