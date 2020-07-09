@@ -84,12 +84,14 @@ def test_set2():
     assert atom[0] == Atom('C')
     assert atom[1] == Atom('C')
     assert len(atom.atom) == 1
-    atom[1] = Atom('Au', [-1] * 2)
+    with pytest.warns(None):
+        atom[1] = Atom('Au', [-1] * 2)
     assert atom[0] == Atom('C')
     assert atom[1] != Atom('Au')
     assert atom[1] == Atom('Au', [-1] * 2)
     assert len(atom.atom) == 2
-    atom['C'] = Atom('Au', [-1] * 2)
+    with pytest.warns(None):
+        atom['C'] = Atom('Au', [-1] * 2)
     assert atom[0] != Atom('Au')
     assert atom[0] == Atom('Au', [-1] * 2)
     assert atom[1] != Atom('Au')
@@ -115,7 +117,8 @@ def test_set3():
 def test_replace1():
     # Add new atoms to the set
     atom = Atoms(['C'] * 10 + ['B'] * 2)
-    atom[range(1, 4)] = Atom('Au', [-1] * 2)
+    with pytest.warns(None):
+        atom[range(1, 4)] = Atom('Au', [-1] * 2)
     assert atom[0] == Atom('C')
     for i in range(1, 4):
         assert atom[i] != Atom('Au')
@@ -123,7 +126,8 @@ def test_replace1():
     assert atom[4] != Atom('Au')
     assert atom[4] != Atom('Au', [-1] * 2)
     assert len(atom.atom) == 3
-    atom.replace(atom[0], Atom('C', [-1] * 2))
+    with pytest.warns(None):
+        atom.replace(atom[0], Atom('C', [-1] * 2))
     assert atom[0] == Atom('C', [-1] * 2)
     assert len(atom.atom) == 3
     assert atom[0] == Atom('C', [-1] * 2)
@@ -138,7 +142,8 @@ def test_replace1():
 def test_replace2():
     # Add new atoms to the set
     atom = Atoms(['C'] * 10 + ['B'] * 2)
-    atom.replace(range(1, 4), Atom('Au', [-1] * 2))
+    with pytest.warns(None):
+        atom.replace(range(1, 4), Atom('Au', [-1] * 2))
     assert atom[0] == Atom('C')
     for i in range(1, 4):
         assert atom[i] != Atom('Au')
@@ -148,7 +153,8 @@ def test_replace2():
     assert len(atom.atom) == 3
 
     # Second replace call (equivalent to replace_atom)
-    atom.replace(atom[0], Atom('C', [-1] * 2))
+    with pytest.warns(None):
+        atom.replace(atom[0], Atom('C', [-1] * 2))
     assert atom[0] == Atom('C', [-1] * 2)
     assert len(atom.atom) == 3
     assert atom[0] == Atom('C', [-1] * 2)
