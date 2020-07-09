@@ -1,5 +1,6 @@
 import pytest
 import os.path as osp
+from sisl.messages import SislWarning
 from sisl.io.siesta.fc import *
 from sisl.unit.siesta import unit_convert
 import numpy as np
@@ -39,8 +40,8 @@ def test_read_fc_old(sisl_tmp):
                 for a in dx:
                     fh.write('{} {} {}\n'.format(*a))
     fc.shape = (20, 3, 2, 2, 3)
-
-    fc2 = fcSileSiesta(f).read_force() / (0.04 * unit_convert('Bohr', 'Ang'))
+    with pytest.warns(SislWarning):
+        fc2 = fcSileSiesta(f).read_force() / (0.04 * unit_convert('Bohr', 'Ang'))
     assert fc.shape != fc2.shape
     fc2 *= np.tile([1, -1], 3).reshape(1, 3, 2, 1, 1)
     fc2.shape = (-1, 3, 2, 2, 3)
