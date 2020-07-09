@@ -8,6 +8,7 @@ from sisl import SislError, geom
 from sisl import Geometry, Atom, SuperCell, SuperCellChild
 from sisl import BrillouinZone, BandStructure
 from sisl import MonkhorstPack
+from sisl.messages import SislDeprecation
 
 
 @pytest.fixture
@@ -125,19 +126,22 @@ class TestBrillouinZone:
                 self.set_supercell(sc)
             def eigh(self, k, *args, **kwargs):
                 return np.arange(3)
-        bz = MonkhorstPack(Test(setup.s1), [2] * 3).asgrid()
+        bz = MonkhorstPack(Test(setup.s1), [2] * 3)
 
         # Check the shape
-        grid = bz.eigh(wrap=lambda eig: eig[0])
+        with pytest.warns(SislDeprecation):
+            grid = bz.asgrid().eigh(wrap=lambda eig: eig[0])
         assert np.allclose(grid.shape, [2] * 3)
 
         # Check the grids are different
-        grid2 = bz.eigh(grid_unit='Bohr', wrap=lambda eig: eig[0])
+        with pytest.warns(SislDeprecation):
+            grid2 = bz.asgrid().eigh(grid_unit='Bohr', wrap=lambda eig: eig[0])
         assert not np.allclose(grid.cell, grid2.cell)
 
         assert np.allclose(grid.grid, grid2.grid)
         for i in range(3):
-            grid = bz.eigh(data_axis=i)
+            with pytest.warns(SislDeprecation):
+                grid = bz.asgrid().eigh(data_axis=i)
             shape = [2] * 3
             shape[i] = 3
             assert np.allclose(grid.shape, shape)
@@ -150,7 +154,8 @@ class TestBrillouinZone:
             def eigh(self, k, *args, **kwargs):
                 return np.arange(3)
         bz = MonkhorstPack(Test(setup.s1), [2] * 3, displacement=[0.1] * 3).asgrid()
-        bz.eigh(wrap=lambda eig: eig[0])
+        with pytest.warns(SislDeprecation):
+            bz.eigh(wrap=lambda eig: eig[0])
 
     def test_mp1(self, setup):
         bz = MonkhorstPack(setup.s1, [2] * 3, trs=False)
