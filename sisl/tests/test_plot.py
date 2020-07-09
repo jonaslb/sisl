@@ -15,7 +15,7 @@ def test_supercell_2d():
     sisl.plot(g.sc, axis=[0, 2])
     sisl.plot(g.sc, axis=[1, 2])
 
-    ax = plt.subplot(111)
+    fig, ax = plt.subplots()
     sisl.plot(g.sc, axis=[1, 2], axes=ax)
     plt.close('all')
 
@@ -32,7 +32,7 @@ def test_geometry_2d():
     sisl.plot(g, axis=[0, 2])
     sisl.plot(g, axis=[1, 2])
 
-    ax = plt.subplot(111)
+    fig, ax = plt.subplots()
     sisl.plot(g, axis=[1, 2], axes=ax)
     plt.close('all')
 
@@ -43,7 +43,7 @@ def test_geometry_2d_atom_indices():
     sisl.plot(g, axis=[0, 2])
     sisl.plot(g, axis=[1, 2])
 
-    ax = plt.subplot(111)
+    fig, ax = plt.subplots()
     sisl.plot(g, axis=[1, 2], axes=ax, atom_indices=True)
     plt.close('all')
 
