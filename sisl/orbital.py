@@ -1,22 +1,22 @@
 # To check for integers
-from functools import partial
-from numbers import Integral
-from math import pi
-from math import sqrt as msqrt
-from math import factorial as fact
+# from functools import partial
+# from numbers import Integral
+# from math import pi
+# from math import sqrt as msqrt
+# from math import factorial as fact
 
-import numpy as np
-from numpy import cos, sin
-from numpy import take, sqrt, square
-from scipy.special import lpmv
-from scipy.interpolate import UnivariateSpline
+# import numpy as np
+# from numpy import cos, sin
+# from numpy import take, sqrt, square
+# from scipy.special import lpmv
+# from scipy.interpolate import UnivariateSpline
 
-from ._internal import set_module
-from . import _plot as plt
-from . import _array as _a
+# from ._internal import set_module
+# from . import _plot as plt
+# from . import _array as _a
 from .messages import deprecate_method
-from .shape import Sphere
-from .utils.mathematics import cart2spher
+# from .shape import Sphere
+# from .utils.mathematics import cart2spher
 
 
 __all__ = ['Orbital', 'SphericalOrbital', 'AtomicOrbital']

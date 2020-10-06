@@ -17,11 +17,10 @@ __main__:1: UserWarning: Help!
 We prefer the later which is particularly useful when the installation path is
 complex.
 """
-import warnings
-from functools import wraps
+# import warnings
+# from functools import wraps
 
 from ._internal import set_module
-
 
 __all__ = ['SislDeprecation', 'SislInfo', 'SislWarning', 'SislException', 'SislError']
 __all__ += ['warn', 'info', 'deprecate', "deprecate_method"]
@@ -155,10 +154,14 @@ def is_jupyter_notebook():
 # If so, simply use the progressbar class there.
 # Otherwise, create a fake one.
 try:
+    print("trying!")
     if is_jupyter_notebook():
+        print("its a jupyter nb, importing tqdm notebook!")
         from tqdm import tqdm_notebook as _tqdm
     else:
+        print("its not a nb, importing normal tqdm")
         from tqdm import tqdm as _tqdm
+    print("imported tqdm!")
 except ImportError:
     # Notify user of better option
     info('Please install tqdm (pip install tqdm) for better looking progress bars', register=True)

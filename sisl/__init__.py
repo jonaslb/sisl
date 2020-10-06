@@ -50,94 +50,94 @@ Advanced classes
 
 """
 
-__author__ = "Nick Papior"
-__copyright__ = "LGPL-3.0"
+# __author__ = "Nick Papior"
+# __copyright__ = "LGPL-3.0"
 
-# Import bibtex, version string and the major, minor, micro as well
-from . import info
-from .info import bibtex as __bibtex__
-from .info import git_revision as __git_revision__
-from .info import version as __version__
-from .info import major as __major__
-from .info import minor as __minor__
-from .info import micro as __micro__
-from .info import cite
+# # Import bibtex, version string and the major, minor, micro as well
+# from . import info
+# from .info import bibtex as __bibtex__
+# from .info import git_revision as __git_revision__
+# from .info import version as __version__
+# from .info import major as __major__
+# from .info import minor as __minor__
+# from .info import micro as __micro__
+# from .info import cite
 
-# Import the Selector
-from .selector import *
+# # Import the Selector
+# from .selector import *
 
-# Import oplist
-from .oplist import oplist
+# # Import oplist
+# from .oplist import oplist
 
-# Import plot routine
-from ._plot import plot as plot
+# # Import plot routine
+# from ._plot import plot as plot
 
-# Import warning classes
-# We currently do not import warn and info
-# as they are too generic names in case one does from sisl import *
-# Perhaps we should simply remove them from __all__?
-from .messages import SislException, SislWarning, SislInfo, SislError
-from .messages import SislDeprecation
+# # Import warning classes
+# # We currently do not import warn and info
+# # as they are too generic names in case one does from sisl import *
+# # Perhaps we should simply remove them from __all__?
+# from .messages import SislException, SislWarning, SislInfo, SislError
+# from .messages import SislDeprecation
 
-# load the most commonly, and basic classes
-# The unit contain the SI standard conversions using
-# all digits (not program specific)
-from .unit import unit_group, unit_convert, unit_default, units
-from . import unit
+# # load the most commonly, and basic classes
+# # The unit contain the SI standard conversions using
+# # all digits (not program specific)
+# from .unit import unit_group, unit_convert, unit_default, units
+# from . import unit
 
-# Import numerical constants (they required unit)
-from . import constant
-# To make it easier to type ;)
-C = constant
+# # Import numerical constants (they required unit)
+# from . import constant
+# # To make it easier to type ;)
+# C = constant
 
-# Specific linear algebra
-from . import linalg
+# # Specific linear algebra
+# from . import linalg
 
-# Utilities
-from . import utils
+# # Utilities
+# from . import utils
 
-# Mixing
-from . import mixing
+# # Mixing
+# from . import mixing
 
-# Below are sisl-specific imports
-from .quaternion import *
-from .shape import *
+# # Below are sisl-specific imports
+# from .quaternion import *
+# from .shape import *
 
-from .supercell import *
-from .atom import *
+# from .supercell import *
+# from .atom import *
 
-from .orbital import *
-from .geometry import *
-from .grid import *
+# from .orbital import *
+# from .geometry import *
+# from .grid import *
 
-from .sparse import *
+# from .sparse import *
 from .sparse_geometry import *
 
 # Physical quantities and required classes
-from .physics import *
+# from .physics import *
 
-# The io files requires imports from the above modules
-# Hence, we *must* import it last.
-# This makes one able to get files through:
-#  import sisl
-#  sisl.io.tbtgfSileTBtrans
-# or
-#  sisl.get_sile
-# This will reduce the cluttering of the separate entities
-# that sisl is made of.
-from . import io
-from .io.sile import (add_sile, get_sile_class, get_sile,
-                      get_siles, SileError,
-                      BaseSile, Sile, SileCDF, SileBin)
+# # The io files requires imports from the above modules
+# # Hence, we *must* import it last.
+# # This makes one able to get files through:
+# #  import sisl
+# #  sisl.io.tbtgfSileTBtrans
+# # or
+# #  sisl.get_sile
+# # This will reduce the cluttering of the separate entities
+# # that sisl is made of.
+# from . import io
+# from .io.sile import (add_sile, get_sile_class, get_sile,
+#                       get_siles, SileError,
+#                       BaseSile, Sile, SileCDF, SileBin)
 
-# Import the default geom structure
-# This enables:
-# import sisl
-# sisl.geom.graphene
-from . import geom
+# # Import the default geom structure
+# # This enables:
+# # import sisl
+# # sisl.geom.graphene
+# from . import geom
 
-# Make these things publicly available
-__all__ = [s for s in dir() if not s.startswith('_')]
-__all__ += [f'__{s}__' for s in ['bibtex', 'version', 'major', 'minor', 'micro']]
-__all__ += [f'__{s}__' for s in ['git_revision']]
-__all__ += [f'__{s}__' for s in ['author', 'copyright']]
+# # Make these things publicly available
+# __all__ = [s for s in dir() if not s.startswith('_')]
+# __all__ += [f'__{s}__' for s in ['bibtex', 'version', 'major', 'minor', 'micro']]
+# __all__ += [f'__{s}__' for s in ['git_revision']]
+# __all__ += [f'__{s}__' for s in ['author', 'copyright']]

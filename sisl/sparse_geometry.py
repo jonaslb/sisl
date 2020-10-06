@@ -1,27 +1,27 @@
-from numbers import Integral
-import warnings
-import functools as ftool
-import itertools
-import operator
-import numpy as np
-from numpy.lib.mixins import NDArrayOperatorsMixin
-from numpy import (
-    int32,
-    take, delete, argsort,
-    unique, diff, allclose,
-    tile, repeat, concatenate
-)
+# from numbers import Integral
+# import warnings
+# import functools as ftool
+# import itertools
+# import operator
+# import numpy as np
+# from numpy.lib.mixins import NDArrayOperatorsMixin
+# from numpy import (
+#     int32,
+#     take, delete, argsort,
+#     unique, diff, allclose,
+#     tile, repeat, concatenate
+# )
 
-from ._internal import set_module
-from . import _array as _a
+# from ._internal import set_module
+# from . import _array as _a
 from .atom import Atom
-from .orbital import Orbital
-from .geometry import Geometry
-from .messages import warn, SislError, SislWarning, tqdm_eta, deprecate_method
-from ._indices import indices_only
-from ._help import get_dtype
-from .utils.ranges import array_arange, list2str
-from .sparse import SparseCSR, isspmatrix, _ncol_to_indptr
+# from .orbital import Orbital
+# from .geometry import Geometry
+# from .messages import warn, SislError, SislWarning, tqdm_eta, deprecate_method
+# from ._indices import indices_only
+# from ._help import get_dtype
+# from .utils.ranges import array_arange, list2str
+# from .sparse import SparseCSR, isspmatrix, _ncol_to_indptr
 
 
 __all__ = ['SparseAtom', 'SparseOrbital']
